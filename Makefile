@@ -52,9 +52,10 @@ access-db:
 	docker exec -it $(SERVICE_NAME) mysql -u$(MYSQL_USER) -p$(PASSWORD) 
 
 backup-db:
-    @echo "Back up database by structure and data"
-    # Dump MySQL database to a file
-    docker exec -i $(SERVICE_NAME) mysqldump --routines=true -u root -p$(PASSWORD) $(DATABASE)  > ./back-up/$(DATABASE)-backup.sql
+	@echo "Back up database by structure and data"
+	# Dump MySQL database to a file
+	# para que te permita descargar con procedimientos
+	docker exec -it $(SERVICE_NAME) mysqldump --routines=true  -u root -p$(PASSWORD) $(DATABASE) > ./back-up/$(DATABASE)-backup.sql
 
 down:
 	@echo "Remove the Database"
