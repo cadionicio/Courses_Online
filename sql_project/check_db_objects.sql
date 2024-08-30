@@ -78,8 +78,6 @@ ORDER BY
     EVENT_MANIPULATION;
 
 
--- Verificación de roles y usuarios
-
 SELECT
     FROM_USER AS Roles,
     TO_USER AS Usuarios,
@@ -90,8 +88,8 @@ SELECT
     CASE 
         WHEN FROM_USER = 'SISTEMA' THEN 'Acceso total al sistema'
         WHEN FROM_USER = 'ADMIN' THEN 'Permisos de administrador'
-        WHEN FROM_USER = 'DEPOSITO' THEN 'Control de depósito'
-        ELSE 'Consultas a info de contacto'
+        WHEN FROM_USER = 'PROFESOR' THEN 'Control sobre cursos y lecciones'
+        ELSE 'Acceso limitado para estudiantes'
     END AS Comentario
 FROM mysql.role_edges
 ORDER BY Roles ASC;
