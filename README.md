@@ -317,4 +317,69 @@ WHERE ID_Opinion_Estudiante = 1;
 SELECT * FROM LOG_CAMBIOS WHERE tabla_afectada = 'Opinion_Estudiante';
 ```
 
+## Creación de Roles y Asignación de Usuarios
 
+Este proyecto también incluye la configuración de roles y usuarios para gestionar el acceso a la base de datos `OnlineCourses`. A continuación se detalla la configuración de los roles, los permisos otorgados, y la creación de usuarios.
+
+### Roles Configurados
+
+Se han creado cuatro roles principales que representan diferentes niveles de acceso:
+
+1. **SISTEMA**: 
+   - Este rol tiene acceso total a todas las funcionalidades de la base de datos.
+   - **Permisos:** Todos los privilegios (`GRANT ALL PRIVILEGES`).
+
+2. **ADMIN**: 
+   - Este rol tiene permisos administrativos sobre las tablas principales, así como la capacidad de ejecutar funciones y procedimientos específicos.
+   - **Permisos:** 
+     - DML (`SELECT`, `INSERT`, `UPDATE`) sobre las tablas `Usuario`, `Curso`, `Categoria`, `Comision`.
+     - Ejecución de funciones y procedimientos: `contar_cursos_profesor`, `estudiante_inscrito_curso`, `calificacion_promedio_curso`, `actualizar_calificacion`, `agregar_leccion`, `inscribir_estudiante`.
+     - Lectura (`SELECT`) sobre las vistas `EstudiantesPorCurso`, `CalificacionesPromedioPorCurso`, `ProgresoLeccionesPorCurso`.
+
+3. **PROFESOR**: 
+   - Este rol tiene permisos para gestionar las lecciones y materiales de los cursos.
+   - **Permisos:** 
+     - DML (`SELECT`, `INSERT`, `UPDATE`) sobre las tablas `Leccion`, `MaterialCurso`.
+     - Ejecución del procedimiento: `agregar_leccion`.
+     - Lectura (`SELECT`) sobre las vistas `EstudiantesPorCurso`, `ProgresoLeccionesPorCurso`.
+
+4. **ESTUDIANTE**: 
+   - Este rol tiene permisos limitados para consultar y registrar información relacionada con su aprendizaje.
+   - **Permisos:** 
+     - Lectura (`SELECT`) sobre las tablas `Curso`, `Comision`, `Leccion`, `MaterialCurso`.
+     - DML (`SELECT`, `INSERT`) sobre las tablas `Matricula`, `Opinion_Estudiante`.
+     - Lectura (`SELECT`) sobre las vistas `EstudiantesPorCurso`, `CalificacionesPromedioPorCurso`.
+
+### Creación de Usuarios y Asignación de Roles
+
+Se han creado los siguientes usuarios, con contraseñas predeterminadas y se les ha asignado uno de los roles configurados:
+
+#### Usuarios del Sistema
+- **LeoDI** (Contraseña: `sys123`)
+- **JesiB** (Contraseña: `sys456`)
+
+#### Usuarios Administradores
+- **AndreC** (Contraseña: `adm01`)
+- **FedeZ** (Contraseña: `adm02`)
+- **HugoQ** (Contraseña: `adm03`)
+
+#### Usuarios Profesores
+- **CrisA** (Contraseña: `dep01`)
+- **ReneB** (Contraseña: `dep02`)
+- **SantiG** (Contraseña: `dep03`)
+- **MatiK** (Contraseña: `dep04`)
+
+#### Usuarios Estudiantes
+- **RubenM** (Contraseña: `con01`)
+- **LucasN** (Contraseña: `con02`)
+
+### Otorgamiento de Roles
+
+Cada usuario ha sido asignado a uno de los roles según su nivel de acceso. A continuación se muestran los comandos utilizados para otorgar estos roles:
+
+```sql
+GRANT 'SISTEMA' TO 'LeoDI'@'%', 'JesiB'@'%';
+GRANT 'ADMIN' TO 'AndreC'@'localhost', 'FedeZ'@'localhost', 'HugoQ'@'localhost';
+GRANT 'PROFESOR' TO 'CrisA'@'localhost', 'ReneB'@'localhost', 'SantiG'@'localhost', 'MatiK'@'localhost';
+GRANT 'ESTUDIANTE' TO 'RubenM'@'localhost', 'LucasN'@'localhost';
+```
