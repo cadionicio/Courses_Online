@@ -78,6 +78,8 @@ ORDER BY
     EVENT_MANIPULATION;
 
 
+-- Verificación de roles y usuarios
+
 SELECT
     FROM_USER AS Roles,
     TO_USER AS Usuarios,
