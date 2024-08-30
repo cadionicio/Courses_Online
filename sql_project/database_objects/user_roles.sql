@@ -1,3 +1,5 @@
+USE OnlineCourses;
+
 -- CREACIÓN DE ROLES Y ASIGNACIÓN DE USUARIOS
 
 -- Crearemos 4 roles que representan las áreas encargadas
