@@ -59,109 +59,61 @@ GRANT SELECT ON OnlineCourses.CalificacionesPromedioPorCurso TO 'ESTUDIANTE';
 -- Crearemos los usuarios
 
 -- SISTEMA
-DROP USER IF EXISTS
-    'LeoDI'@'%',
-    'JesiB'@'%';
+DROP USER IF EXISTS 'LeoDI'@'%';
+CREATE USER 'LeoDI'@'%' IDENTIFIED BY 'sys123';
 
-CREATE USER 'LeoDI'@'%' IDENTIFIED BY 'sys123'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD_LOCK_TIME 2
-    PASSWORD EXPIRE INTERVAL 180 DAY;
-CREATE USER 'JesiB'@'%' IDENTIFIED BY 'sys456'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD_LOCK_TIME 2
-    PASSWORD EXPIRE INTERVAL 180 DAY;
+DROP USER IF EXISTS 'JesiB'@'%';
+CREATE USER 'JesiB'@'%' IDENTIFIED BY 'sys456';
 
 -- ADMIN
-DROP USER IF EXISTS
-    'AndreC'@'localhost',
-    'FedeZ'@'localhost',
-    'HugoQ'@'localhost';
+DROP USER IF EXISTS 'AndreC'@'localhost';
+CREATE USER 'AndreC'@'localhost' IDENTIFIED BY 'adm01';
 
-CREATE USER 'AndreC'@'localhost' IDENTIFIED BY 'adm01'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK_TIME 5
-    PASSWORD EXPIRE INTERVAL 90 DAY;
-CREATE USER 'FedeZ'@'localhost' IDENTIFIED BY 'adm02'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK_TIME 5
-    PASSWORD EXPIRE INTERVAL 90 DAY;
-CREATE USER 'HugoQ'@'localhost' IDENTIFIED BY 'adm03'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK TIME 2
-    PASSWORD EXPIRE INTERVAL 90 DAY;
+DROP USER IF EXISTS 'FedeZ'@'localhost';
+CREATE USER 'FedeZ'@'localhost' IDENTIFIED BY 'adm02';
+
+DROP USER IF EXISTS 'HugoQ'@'localhost';
+CREATE USER 'HugoQ'@'localhost' IDENTIFIED BY 'adm03';
 
 -- PROFESOR
-DROP USER IF EXISTS
-    'CrisA'@'localhost', 'ReneB'@'localhost',
-    'SantiG'@'localhost', 'MatiK'@'localhost';
+DROP USER IF EXISTS 'CrisA'@'localhost';
+CREATE USER 'CrisA'@'localhost' IDENTIFIED BY 'dep01';
 
-CREATE USER 'CrisA'@'localhost' IDENTIFIED BY 'dep01'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK TIME 5
-    PASSWORD EXPIRE INTERVAL 90 DAY;
-CREATE USER 'ReneB'@'localhost' IDENTIFIED BY 'dep02'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK TIME 5
-    PASSWORD EXPIRE INTERVAL 90 DAY;
-CREATE USER 'SantiG'@'localhost' IDENTIFIED BY 'dep03'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK TIME 5
-    PASSWORD EXPIRE INTERVAL 90 DAY;
-CREATE USER 'MatiK'@'localhost' IDENTIFIED BY 'dep04'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK TIME 5
-    PASSWORD EXPIRE INTERVAL 90 DAY;
+DROP USER IF EXISTS 'ReneB'@'localhost';
+CREATE USER 'ReneB'@'localhost' IDENTIFIED BY 'dep02';
+
+DROP USER IF EXISTS 'SantiG'@'localhost';
+CREATE USER 'SantiG'@'localhost' IDENTIFIED BY 'dep03';
+
+DROP USER IF EXISTS 'MatiK'@'localhost';
+CREATE USER 'MatiK'@'localhost' IDENTIFIED BY 'dep04';
 
 -- ESTUDIANTE
-DROP USER IF EXISTS
-    'RubenM'@'localhost', 'LucasN'@'localhost';
+DROP USER IF EXISTS 'RubenM'@'localhost';
+CREATE USER 'RubenM'@'localhost' IDENTIFIED BY 'con01';
 
-CREATE USER 'RubenM'@'localhost' IDENTIFIED BY 'con01'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK TIME 5
-    PASSWORD EXPIRE INTERVAL 90 DAY;
-CREATE USER 'LucasN'@'localhost' IDENTIFIED BY 'con02'
-    FAILED_LOGIN_ATTEMPTS 3
-    PASSWORD LOCK TIME 5
-    PASSWORD EXPIRE INTERVAL 90 DAY;
+DROP USER IF EXISTS 'LucasN'@'localhost';
+CREATE USER 'LucasN'@'localhost' IDENTIFIED BY 'con02';
 
 -- Otorgamos roles
 
-GRANT 'SISTEMA' TO
-    'LeoDI'@'%', 'JesiB'@'%';
+GRANT 'SISTEMA' TO 'LeoDI'@'%', 'JesiB'@'%';
 
-GRANT 'ADMIN' TO
-    'AndreC'@'localhost', 'FedeZ'@'localhost',
-    'HugoQ'@'localhost';
+GRANT 'ADMIN' TO 'AndreC'@'localhost', 'FedeZ'@'localhost', 'HugoQ'@'localhost';
 
-GRANT 'PROFESOR' TO
-    'CrisA'@'localhost', 'ReneB'@'localhost',
-    'SantiG'@'localhost', 'MatiK'@'localhost';
+GRANT 'PROFESOR' TO 'CrisA'@'localhost', 'ReneB'@'localhost', 'SantiG'@'localhost', 'MatiK'@'localhost';
 
-GRANT 'ESTUDIANTE' TO
-    'RubenM'@'localhost', 'LucasN'@'localhost';
+GRANT 'ESTUDIANTE' TO 'RubenM'@'localhost', 'LucasN'@'localhost';
 
 -- Activación de roles por defecto
 
-SET DEFAULT ROLE 'SISTEMA'
-    TO 'LeoDI'@'%',
-        'JesiB'@'%';
+SET DEFAULT ROLE 'SISTEMA' TO 'LeoDI'@'%', 'JesiB'@'%';
 
-SET DEFAULT ROLE 'ADMIN'
-    TO 'AndreC'@'localhost',
-        'FedeZ'@'localhost',
-        'HugoQ'@'localhost';
+SET DEFAULT ROLE 'ADMIN' TO 'AndreC'@'localhost', 'FedeZ'@'localhost', 'HugoQ'@'localhost';
 
-SET DEFAULT ROLE 'PROFESOR'
-    TO 'CrisA'@'localhost',
-        'ReneB'@'localhost',
-        'SantiG'@'localhost',
-        'MatiK'@'localhost';
+SET DEFAULT ROLE 'PROFESOR' TO 'CrisA'@'localhost', 'ReneB'@'localhost', 'SantiG'@'localhost', 'MatiK'@'localhost';
 
-SET DEFAULT ROLE 'ESTUDIANTE'
-    TO 'RubenM'@'localhost',
-        'LucasN'@'localhost';
+SET DEFAULT ROLE 'ESTUDIANTE' TO 'RubenM'@'localhost', 'LucasN'@'localhost';
 
 -- Actualizamos los privilegios
 
@@ -180,3 +132,4 @@ SHOW GRANTS FOR 'SantiG'@'localhost';
 SHOW GRANTS FOR 'MatiK'@'localhost';
 SHOW GRANTS FOR 'RubenM'@'localhost';
 SHOW GRANTS FOR 'LucasN'@'localhost';
+
